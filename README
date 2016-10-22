@@ -1,0 +1,11 @@
+Problem 1:
+
+%% Find maximum square patch of non cloud image %%
+% binarize image
+% create a distance matrix that measures the distance between each pixel and its nearest cloud pixel 
+% find the (i,j) index corresponding to the point farthest away from a cloud
+% mark the square area according to this pixel and the total length of the area
+ Time Results :
+ Cloud1.jpg - 9.339430 seconds
+ Cloud2.jpg - 1.366846 seconds
+ Cloud3.jpg - 0.389064 seconds

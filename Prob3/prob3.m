@@ -1,15 +1,7 @@
 %% Detect winner of tic-tac-toe %%
 
-%% Winning patterns for X %%
-win1X = [2,0,0;0,2,0;0,0,2];
-win2X = [0,0,2;0,2,0;2,0,0];
-win3X = [2,2,2;0,0,0;0,0,0];
-win4X = [0,0,0;2,2,2;0,0,0];
-win5X = [0,0,0;0,0,0;2,2,2];
-win6X = [2,0,0;0,0,0;2,2,2];
-
-
-im = imread('tic-tac-toe4.jpg');
+bin_array = [0,2,3];
+im = imread('tic-tac-toe1.jpg');
 
 %% All rectangular bounding box of objects %%
 bw = im2bw(im);
@@ -42,30 +34,61 @@ startX = start(1); startY = start(2);
 for i=1:size(ind,2)
    image_patch = imcrop(im,[stats(ind(i)).BoundingBox]);
    euler_no = bweuler(im2bw(image_patch));
-   disp(euler_no)
    location = [stats(ind(i)).BoundingBox];
    row = ceil(location(2)/200); col = ceil(location(1)/200);
    grid(row,col) = euler_no;
 end
 
-winner = 0;
-isWon = 0;
-for x=1:3
-   player_value = grid(x,1);
-   if player_value == 0
+winner = -1;
+%% Check column wise
+for i=1:3
+   N=hist(grid(:,i),[0 2 3]);
+   ind=find(N==3);
+   if(size(ind,2)==0)
       continue
-   end
-   for y=1:3
-      current = grid(x,y);
-      if (current == 0 || current~=player_value)
-         break
-      end
-      if (y == 3)
-         isWon = 1;
-         winner = value;
-      end
-   end
-   if isWon==1
+   else
+      winner = grid(ind)
       break
    end
 end
+
+%% Check row wise
+if winner == -1
+   for i=1:3
+      N=hist(grid(i,:),[0 2 3]);
+      [ind]=find(N==3)
+      if(size(ind,2)==0)
+         continue
+      else
+         winner = grid(ind)
+         break
+      end
+   end
+end
+
+%% Check diagonals
+if winner == -1
+   diag_left = diag(grid)
+   l_ind = find(hist(diag_left,[0 2 3])==3)
+   if(size(l_ind,2)==0)
+      %% check right diagonal
+      diag_right = diag(fliplr(grid))' %'
+      r_ind = find(hist(diag_left,[0 2 3])==3)
+      if(size(r_ind,2)==0)
+         winner = -1;
+      else
+         winner = bin_array(diag_right(r_ind));
+      end
+   else
+      winner = bin_array(diag_left(l_ind));
+   end
+end
+
+if winner == 2
+   disp('X WON!')
+elseif winner == 3
+   disp('O WON!')
+else
+   disp('TIE!')
+end
+
