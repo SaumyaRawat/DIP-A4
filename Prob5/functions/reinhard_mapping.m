@@ -8,16 +8,20 @@ function output = reinhard_mapping(img, a)
 
     delta = 1e-6;
     white = 1.5;
-    phi = 4;
     epsilon = 1e-4;
-    Lw = rgb2gray(img);
+    Lw = img;%0.27*img(:,:,1)+0.67*img(:,:,2)+0.06*img(:,:,3);
     LwMean = exp(mean(mean(log(delta + Lw))));
-    Lm = (a / LwMean) * Lw;
-    figure;imshow(Lm);
-    Ld = (Lm .* (1 + Lm / (white * white))) ./ (1 + Lm);
-    for channel = 1:3
-    	Cw = img(:,:,channel) ./ Lw;
-        output(:,:,channel) = Cw .* Ld;
-    end
+
+    Lm(:,:,1) = (a * Lw(:,:,1)) / LwMean(:,:,1);
+    Lm(:,:,2) = (a * Lw(:,:,2)) / LwMean(:,:,2);
+    Lm(:,:,3) = (a * Lw(:,:,3)) / LwMean(:,:,3);
+    output = Lm;
+%    figure;imshow(Lm);
+
+%    Ld = (Lm .* (1 + Lm / (white * white))) ./ (1 + Lm);
+%    for channel = 1:3
+%    	Cw = img(:,:,channel) ./ Lw;
+%        output(:,:,channel) = Cw .* Ld;
+%    end
 
 end
