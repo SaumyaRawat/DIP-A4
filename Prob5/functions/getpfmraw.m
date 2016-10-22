@@ -38,7 +38,7 @@ function pic=getpfmraw(filename)
 %
  width=[];
  while (isempty(width))
-   [width,cnt]=fscanf(fid,'%d',1)
+   [width,cnt]=fscanf(fid,'%d',1);
    if (cnt==0)
      fgetl(fid);
    end
@@ -46,11 +46,11 @@ function pic=getpfmraw(filename)
 
 %% Get height.
 %
- height=fscanf(fid,'%d',1)
+ height=fscanf(fid,'%d',1);
 
 %% Get max gray value.
 %
- maxgray=fscanf(fid,'%f',1)
+ maxgray=fscanf(fid,'%f',1);
 
 
 %% Read actual data.
