@@ -1,9 +1,8 @@
 function[output]=lat_thresh(image,m,n)
 %SAUVOLA local thresholding.
 	k = 0.34;
-
-	% Convert to gray
-	image = rgb2gray(image);
+	% Convert to gray and filter using weiner filter
+	[image,noise] = wiener2(rgb2gray(image),[5 5]);
 	[rows columns] = size(image);   % size of the image
 
 	% calculate mean image from integral image

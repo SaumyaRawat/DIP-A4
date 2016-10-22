@@ -1,13 +1,13 @@
 %% Detect winner of tic-tac-toe %%
 
 bin_array = [0,2,3];
-im = imread('tic-tac-toe1.jpg');
+im = imread('tic-tac-toe4.jpg');
 
 %% All rectangular bounding box of objects %%
 bw = im2bw(im);
 
 % find both black and white regions
-stats = [regionprops(bw); regionprops(not(bw))]
+stats = [regionprops(bw); regionprops(not(bw))];
 
 % show the image and draw the detected rectangles on it
 figure;imshow(bw); 
@@ -47,7 +47,7 @@ for i=1:3
    if(size(ind,2)==0)
       continue
    else
-      winner = grid(ind)
+      winner = grid(ind);
       break
    end
 end
@@ -56,11 +56,11 @@ end
 if winner == -1
    for i=1:3
       N=hist(grid(i,:),[0 2 3]);
-      [ind]=find(N==3)
+      [ind]=find(N==3);
       if(size(ind,2)==0)
          continue
       else
-         winner = grid(ind)
+         winner = grid(ind);
          break
       end
    end
@@ -68,12 +68,12 @@ end
 
 %% Check diagonals
 if winner == -1
-   diag_left = diag(grid)
-   l_ind = find(hist(diag_left,[0 2 3])==3)
+   diag_left = diag(grid);
+   l_ind = find(hist(diag_left,[0 2 3])==3);
    if(size(l_ind,2)==0)
       %% check right diagonal
-      diag_right = diag(fliplr(grid))' %'
-      r_ind = find(hist(diag_left,[0 2 3])==3)
+      diag_right = diag(fliplr(grid))'; %'
+      r_ind = find(hist(diag_left,[0 2 3])==3);
       if(size(r_ind,2)==0)
          winner = -1;
       else

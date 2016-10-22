@@ -7,8 +7,7 @@ function output = dodge_and_burn(img, a)
     end
 
     delta = 1e-6;
-    white = 1.5;
-    phi = 15;
+    phi = 100;
     alpha_1 = 0.35;
     alpha_2 = 1.6 * alpha_1;
     epsilon = 1e-4;
@@ -25,8 +24,8 @@ function output = dodge_and_burn(img, a)
     		s = 1;
     		V1 = conv(Lm(x,y),(1/pi*(alpha_1*s).^2)*exp(-((x.^2+y.^2)/(alpha_1*s).^2)));
     		V2 = conv(Lm(x,y),(1/pi*(alpha_2*s).^2)*exp(-((x.^2+y.^2)/(alpha_2*s).^2)));
+            V = (V1-V2)/( (((2.^phi)*a)/(s.^2)) + V1 );
     		%% Find the scale sm %%
-    		V = (V1-V2)/( (((2.^phi)*a)/(s.^2)) + V1 );
     		while V >= threshold
     			s = 1.6*s;
 	    		V1 = conv(Lm(x,y),(1/pi*(alpha_1*s).^2)*exp(-((x.^2+y.^2)/(alpha_1*s).^2)));

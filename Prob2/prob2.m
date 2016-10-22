@@ -25,14 +25,22 @@ for i = 1:numel(bottles)
 	range=(im > 0 & im <= 220);
 	im(~range)=0;
 	im(range)=1; 
-	imshow(im)
+	%imshow(im)
 	bottle_content = sum(im(range));
 	ratio = bottle_content/(size(im,1)*size(im,2));
-	figure;imshow(bottles(i).image)
-	i
+	%figure;imshow(bottles(i).image)
 	if ( ratio > 0.7 )
-		disp('Full!')
+		%disp('Full!')
+		bottles(i).capacity = 'Full';
 	else
-		disp('Inadequate!')
+		%disp('Inadequate!')
+		bottles(i).capacity = 'Inadequate';
 	end
+end
+figure;
+for i = 1:numel(bottles)
+	subplot(1,5,i)
+	imshow(bottles(i).image)
+	str = sprintf( '%d:%s',i,bottles(i).capacity);
+	title(str)
 end
