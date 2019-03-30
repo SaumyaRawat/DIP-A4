@@ -1,4 +1,4 @@
-Problem 1:
+# Problem 1:
 
 %% Find maximum square patch of non cloud image %%
 % binarize image
@@ -10,7 +10,7 @@ Problem 1:
  Cloud2.jpg - 1.366846 seconds
  Cloud3.jpg - 0.389064 seconds
 
-Problem 2:
+# Problem 2:
 
 Assumptions : Area of liquid covered by bottle from the mid point of shoulder and neck can be accurately measured by the sum of the binarized image and the threshold(min area covered for an adequate bottle) is roughly 0.7. Also the colour of images obtained by the system will more or less be similar
 
@@ -21,7 +21,7 @@ Assumptions : Area of liquid covered by bottle from the mid point of shoulder an
 % Segment the image using a threshold based on the colour of the contents of the bottle
 % Calculate the % of bottle filled using ratio of  : bottle_filled/total length of the bottle(in terms of width * height)
 
-Problem 3:
+# Problem 3:
 
 %% Find winner of tic-tac-toe image %%
 % Binarize the image for easier computation (not necessary)
@@ -30,7 +30,7 @@ Problem 3:
 % Traverse linearly to find winner of the grid using histogram plots of X,O,'blank'
 % If none found, declare TIE
 
-Problem 4:
+# Problem 4:
 
 %% Binarize document images into foreground and background regions %%
 
@@ -45,7 +45,7 @@ Problem 4:
 % Calculate the integral image, using which find the mean image and std dev image having corr values for each pixel
 % the threshold for each pixel is then :  mean.*(1 + k * (deviation / max_deviation-1))
 
-Problem 5:
+# Problem 5:
 
 %% Tone Mapping w/ 3 techniques %%
 % Read in the image using getpfmraw function 
