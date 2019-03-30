@@ -59,16 +59,16 @@ Assumptions : Area of liquid covered by bottle from the mid point of shoulder an
 * Finally Lm is given by (Lw/LwMean) * key, the key value indicates whether the whole scene is going to be light or dark
 
 4. Local Dodge And Burn
-% Since HDR images lose important details in global tone mapping after enhancing world luminance
-% Local region is defined as the area surrounding the centre pixel in question where no large contrast changes occur
-% Dodging : Light is witheld from a region
-% Burning : Light is added to that region
-% Equivalent to finding a new key value for every pixel
-% Calculate Lm as before
-% V1 is the average of the centre pixel according to neighbourhood region defined by Sm
-% Sm is chosen after iterating for every pixel using the response function
-% V(x,y,Sm) < threshold
-% Once this Sm is computed for a pixel (x,y) Ldisplay is computed as : L(x,y) / 1 + V1(x,y,Sm)
-% Dark Pixel (L) on light V1 : lowers Ld more, hence increases contrast (dodging) 
-% Light Pixel (L) on dark V1 : lowers Ld less, hence increases contrast (burning)
+* Since HDR images lose important details in global tone mapping after enhancing world luminance
+* Local region is defined as the area surrounding the centre pixel in question where no large contrast changes occur
+* Dodging : Light is witheld from a region
+* Burning : Light is added to that region
+* Equivalent to finding a new key value for every pixel
+* Calculate Lm as before
+* V1 is the average of the centre pixel according to neighbourhood region defined by Sm
+* Sm is chosen after iterating for every pixel using the response function
+* V(x,y,Sm) < threshold
+* Once this Sm is computed for a pixel (x,y) Ldisplay is computed as : L(x,y) / 1 + V1(x,y,Sm)
+* Dark Pixel (L) on light V1 : lowers Ld more, hence increases contrast (dodging) 
+* Light Pixel (L) on dark V1 : lowers Ld less, hence increases contrast (burning)
 
